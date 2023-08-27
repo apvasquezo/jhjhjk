@@ -6,6 +6,8 @@ import entryTime from "../Componentes/entryTime";
 import Consult from "../Componentes/Consult";
 import Home from "../Componentes/Home";
 import LoginScreen from "../Componentes/LoginScreen";
+import Checkin from "../Componentes/checkin";
+import ExitTime from "../Componentes/exitTime";
 
 const stack=createNativeStackNavigator()
 
@@ -16,7 +18,11 @@ const MainStack = () => {
                 <stack.Screen
                 name="LoginScreen" component={LoginScreen} />                
                 <stack.Screen
+                name="checkin" component={Checkin} />                
+                <stack.Screen                
                 name="Home" component={Home} />
+                <stack.Screen
+                name="exitTime" component={ExitTime} />
                 <stack.Screen
                 name="Consult" component={Consult} />   
                 <stack.Screen

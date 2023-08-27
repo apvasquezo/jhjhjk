@@ -2,21 +2,22 @@ import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import {
-  checkbox,
   StyleSheet,
   Text,
   View,
   TextInput,
   Image,
   Pressable,
+  Checkbox,
 } from 'react-native';
 
-const NewsEvent = (navigation) => {
+const NewsEvent = () => {
   const [licencia, setLicencia] = useState(false);
   const [vaca, setVaca] = useState(false);
   const [fechaF, setFechaF] = useState('');
   const [fechaI, setFechaI] = useState('');
-
+  const navigation=useNavigation();
+  
   const NovedadL = () => {
     setLicencia(true);
     setVaca(false);
@@ -35,14 +36,14 @@ const NewsEvent = (navigation) => {
     <View style={styles.Container}>
       <Image style={styles.logo} source={require('../images/mina.jpg')} />
       <Text style={styles.label}>Tipo de Novedad</Text>
-      <checkbox
+      <Checkbox
         title="Licencia"
         checked={licencia}
         checkedIcon="dot-circle-o"
         uncheckedIcon="circle-o"
         onPress={NovedadL}
       />
-      <checkbox
+      <Checkbox
         title="Vacaciones"
         checked={vaca}
         checkedIcon="dot-circle-o"

@@ -9,10 +9,10 @@ import {
   Pressable,
 } from 'react-native';
 
-const entryTime = () => {
-  const [date, setDate] = useState(Date);
-  const [entry, setEntry] = useState('');
-  const [time, setTime] = useState(Date);
+const ExitTime = () => {
+  const [dateS, setDateS] = useState(Date);
+  const [entryS, setEntryS] = useState('');
+  const [timeS, setTimeS] = useState(Date);
   const navigation=useNavigation();
 
   const save = () => {
@@ -24,20 +24,20 @@ const entryTime = () => {
     <View style={styles.Container}>
       <Image style={styles.logo} source={require('../images/mina.jpg')} />
       <View>
-        <Text style={styles.label}>Fecha de Ingreso</Text>
+        <Text style={styles.label}>Fecha de Salida</Text>
         <TextInput
           placeholder="01/01/2024"
-          value={date}
-          onChangeText={setDate => this.setState({ Date })}
+          value={dateS}
+          onChangeText={setDateS => this.setState({ Date })}
           style={styles.input}
         />
       </View>
       <View>
-        <Text style={styles.label}>Hora de Ingreso</Text>
+        <Text style={styles.label}>Hora de Salida</Text>
         <TextInput
           placeholder="10:00"
-          value={time}
-          onChangeText={setTime => this.setState({ Date })}
+          value={timeS}
+          onChangeText={setTimeS => this.setState({ Date })}
           style={styles.input}
         />
       </View>
@@ -45,8 +45,8 @@ const entryTime = () => {
         <Text style={styles.label}>Jornada Laboral</Text>
         <TextInput
           placeholder="AM o PM"
-          value={entry}
-          onChangeText={setEntry}
+          value={entryS}
+          onChangeText={setEntryS}
           style={styles.input}
         />
       </View>
@@ -109,6 +109,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginHorizontal: 20,
   },
+  datePickerStyle: {
+    width: 200,
+    marginTop: 20,
+  },
 });
 
-export default entryTime;
+export default ExitTime;

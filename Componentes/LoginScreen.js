@@ -8,6 +8,7 @@ import {
   TextInput,
   Image,
   Pressable,
+  Icon,
 } from 'react-native';
 
 
@@ -18,10 +19,11 @@ const LoginScreen = () => {
 
   const register=()=>{
     console.log('to register');
+    navigation.navigate('Checkin');
   }
   const handleLogin = () => {
     // autenticación
-    if (username === 'usuario' && password === 'clave') {
+    if (username === 'admin' && password === 'clave') {
       console.log('Inicio de sesión exitoso');
       navigation.navigate('Home');
     } else {
