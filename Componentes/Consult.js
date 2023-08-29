@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import DatePicker from 'react-native-date-picker'
+import DatePicker from 'react-native-date-picker';
 
 import {
   Button,
@@ -52,9 +52,10 @@ const Consult = () => {
             modal
             open={open}
             date={fechaI}
-            onConfirm={(fechaI) => {
+
+            onConfirm={(date) => {
               setOpen(false)
-              setFechaI(fechaI)
+              setFechaI(date)
             }}
             onCancel={() => {
               setOpen(false)

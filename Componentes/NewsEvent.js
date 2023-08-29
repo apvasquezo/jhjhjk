@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
-
+import CheckBox from 'react-native-check-box'
 import {
   StyleSheet,
   Text,
@@ -8,12 +8,13 @@ import {
   TextInput,
   Image,
   Pressable,
-  Checkbox,
+  Icon
 } from 'react-native';
 
 const NewsEvent = () => {
-  const [licencia, setLicencia] = useState(false);
-  const [vaca, setVaca] = useState(false);
+  const [check4, setCheck4] = useState(false);
+  const [selectedIndex, setIndex] = React.useState(0);
+  const [check2, setCheck2] = useState(false);
   const [fechaF, setFechaF] = useState('');
   const [fechaI, setFechaI] = useState('');
   const navigation=useNavigation();
@@ -34,22 +35,44 @@ const NewsEvent = () => {
 
   return (
     <View style={styles.Container}>
-      <Image style={styles.logo} source={require('../images/mina.jpg')} />
+      <Image
+        style={styles.logo}
+        source={require('../images/mina.jpg')}
+      />
       <Text style={styles.label}>Tipo de Novedad</Text>
-      <Checkbox
-        title="Licencia"
-        checked={licencia}
-        checkedIcon="dot-circle-o"
-        uncheckedIcon="circle-o"
-        onPress={NovedadL}
-      />
-      <Checkbox
-        title="Vacaciones"
-        checked={vaca}
-        checkedIcon="dot-circle-o"
-        uncheckedIcon="circle-o"
-        onPress={NovedadV}
-      />
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          leftText="Licencia"
+          checkedIcon="dot-circle-o"
+          uncheckedIcon="circle-o"
+          checked={check2}
+          onClick={() => setCheck2(!check2)}
+        />
+        <CheckBox
+          leftText="Vacaciones"
+          checkedIcon={
+            <Icon
+              name="radio-button-checked"
+              type="material"
+              color="green"
+              size={25}
+              iconStyle={{ marginRight: 10 }}
+            />
+          }
+          uncheckedIcon={
+            <Icon
+              name="radio-button-unchecked"
+              type="material"
+              color="grey"
+              size={25}
+              iconStyle={{ marginRight: 10 }}
+            />
+          }
+          checked={check4}
+          onPress={() => setCheck4(!check4)}
+        />         
+      </View>
+      
       <Text style={styles.label}>Fecha Inicial</Text>
       <TextInput
         placeholder="01/01/2023"
@@ -57,7 +80,7 @@ const NewsEvent = () => {
         onChangeText={setFechaI}
         style={styles.input}
       />
-      <Text style={styles.label}>HFecha Final</Text>
+      <Text style={styles.label}>Fecha Final</Text>
       <TextInput
         placeholder="01/01/2023"
         value={fechaF}
@@ -121,6 +144,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 15,
     fontWeight: '600',
+    marginHorizontal: 20,
+  },
+  checkboxContainer: {
+    width: '40%',
+    height: 60,
+    font: 'Calendas Plus',
+    fontSize: 30,
+    marginHorizontal: 40,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+  },
+  checkbox: {
+    alignSelf: 'center',
   },
 });
 

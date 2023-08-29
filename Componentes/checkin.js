@@ -15,7 +15,7 @@ const Checkin = () => {
   const [password, setPassword] = useState('');
   const [name, setname] = useState('');
   const [email, setemail] = useState('');
-  const [regular,setRegular]=usetate('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,4}$')
+  const [regular,setRegular]=useState('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,4}$')
   const navigation = useNavigation();
 
   const toregistet = () => {
@@ -66,7 +66,7 @@ const Checkin = () => {
           style={styles.input}
         />
       </View>
-      <Pressable style={styles.btn_cita} onPress={register}>
+      <Pressable style={styles.btn_cita} onPress={toregistet}>
         <Text style={styles.btn_txtcita}>Registrar</Text>
       </Pressable>
     </View>
@@ -114,6 +114,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     marginVertical: 5,
+  },
+  label: {
+    font: 'Calendas Plus',
+    fontSize: 15,
+    color: '#000000',
+    marginBottom: 5,
+    marginTop: 15,
+    fontWeight: '600',
+    marginHorizontal: 20,
   },
 });
 
