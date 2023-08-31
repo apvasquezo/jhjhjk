@@ -1,24 +1,24 @@
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from 'react-native-check-box'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  Pressable,
-  Icon
+import CheckBox from 'react-native-check-box';
+import Datepicker from 'react-native-modern-datepicker';
+import { getToday, getFormatedDate } from 'react-native-modern-datepicker';
+
+import { StyleSheet, Text, View, TextInput, Image,
+  Pressable, TouchableOpacity, Modal, ScrollView, Icon,
 } from 'react-native';
 
 const NewsEvent = () => {
+  const today= new Date();
+  const starToday=getFormatedDate(today.setDate(today.getDate()+1), 'YYYY/MM/DD')
   const [check4, setCheck4] = useState(false);
   const [selectedIndex, setIndex] = React.useState(0);
   const [check2, setCheck2] = useState(false);
-  const [fechaF, setFechaF] = useState('');
-  const [fechaI, setFechaI] = useState('');
+  const [fechaI, setFechaI] = useState( new Date());  
+  const [fechaF, setFechaF] = useState( new Date());
+  const [open, SetOpen] = useState(false);
   const navigation=useNavigation();
-  
+
   const NovedadL = () => {
     setLicencia(true);
     setVaca(false);
@@ -32,66 +32,118 @@ const NewsEvent = () => {
     console.log('Graba Novedad');
     navigation.navigate('Home');
   };
+  function handleOpen(){
+    SetOpen(!open);
+  }
+
+  function handleChangeI(propDate){
+    setFechaI(propDate)
+  }
+  function handleChangeF(propDate){
+    setFechaF(propDate)
+  }
 
   return (
-    <View style={styles.Container}>
-      <Image
-        style={styles.logo}
-        source={require('../images/mina.jpg')}
-      />
-      <Text style={styles.label}>Tipo de Novedad</Text>
-      <View style={styles.checkboxContainer}>
-        <CheckBox
-          leftText="Licencia"
-          checkedIcon="dot-circle-o"
-          uncheckedIcon="circle-o"
-          checked={check2}
-          onClick={() => setCheck2(!check2)}
+    <ScrollView>
+      <View style={styles.Container}>
+        <Image
+          style={styles.logo}
+          source={require('../images/mina.jpg')}
         />
-        <CheckBox
-          leftText="Vacaciones"
-          checkedIcon={
-            <Icon
-              name="radio-button-checked"
-              type="material"
-              color="green"
-              size={25}
-              iconStyle={{ marginRight: 10 }}
-            />
-          }
-          uncheckedIcon={
-            <Icon
-              name="radio-button-unchecked"
-              type="material"
-              color="grey"
-              size={25}
-              iconStyle={{ marginRight: 10 }}
-            />
-          }
-          checked={check4}
-          onPress={() => setCheck4(!check4)}
-        />         
+        <Text style={styles.label}>Tipo de Novedad</Text>
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            leftText="Licencia"
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            checked={check2}
+            onClick={() => setCheck2(!check2)}
+          />
+          <CheckBox
+            leftText="Vacaciones"
+            checkedIcon={
+              <Icon
+                name="radio-button-checked"
+                type="material"
+                color="green"
+                size={25}
+                iconStyle={{ marginRight: 10 }}
+              />
+            }
+            uncheckedIcon={
+              <Icon
+                name="radio-button-unchecked"
+                type="material"
+                color="grey"
+                size={25}
+                iconStyle={{ marginRight: 10 }}
+              />
+            }
+            checked={check4}
+            onPress={() => setCheck4(!check4)}
+          />
+          <CheckBox
+            leftText="Incapacidad"
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            checked={check2}
+            onClick={() => setCheck2(!check2)}
+          />         
+        </View>
+        
+        <TouchableOpacity onPress={handleOpen}>
+          <Text style={styles.label}>Fecha Inicial</Text> 
+        </TouchableOpacity>    
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={open}>
+          <Datepicker 
+            locale='es'
+            mode='calendar'
+            minimunDate={starToday}
+            selected={Date}
+            onDateChange={handleChangeI}         
+          />
+          <TouchableOpacity onPress={handleOpen}>
+            <Text style={styles.btn_fecha}>Cerrar</Text>
+          </TouchableOpacity>
+        </Modal>
+        <TextInput 
+          style={styles.input}
+          value={fechaI} 
+          setValue={setFechaI} 
+          disabled />        
+        <TouchableOpacity onPress={handleOpen}>
+          <Text style={styles.label}>Fecha Final</Text>
+        </TouchableOpacity>
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={open}>
+          <Datepicker 
+            locale='es'
+            mode='calendar'
+            minimunDate={starToday}
+            selected={Date}
+            onDateChange={handleChangeF}         
+          />
+          <TouchableOpacity onPress={handleOpen}>
+            <Text style={styles.btn_fecha}>Cerrar</Text>
+          </TouchableOpacity>
+        </Modal>
+        <TextInput 
+          style={styles.input}
+          value={fechaF} 
+          setValue={setFechaF} 
+          disabled />    
+        <View>
+          <Pressable style={styles.btn_cita} onPress={saveNews}>
+            <Text style={styles.btn_txtcita}>Guardar Novedad</Text>
+          </Pressable>
+          </View>
       </View>
-      
-      <Text style={styles.label}>Fecha Inicial</Text>
-      <TextInput
-        placeholder="01/01/2023"
-        value={fechaI}
-        onChangeText={setFechaI}
-        style={styles.input}
-      />
-      <Text style={styles.label}>Fecha Final</Text>
-      <TextInput
-        placeholder="01/01/2023"
-        value={fechaF}
-        onChangeText={setFechaF}
-        style={styles.input}
-      />
-
-      <Pressable style={styles.btn_cita} onPress={saveNews}>
-        <Text style={styles.btn_txtcita}>Guardar Novedad</Text>
-      </Pressable>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -157,6 +209,19 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     alignSelf: 'center',
+  },
+  btn_fecha:{
+    width: '20%',
+    height: 40,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color:'white',
+    paddingHorizontal: 10,
+    paddingVertical:10,
+    marginVertical:10,
+    marginHorizontal:150,   
+    backgroundColor:'#04a6fc',
+    borderRadius:20, 
   },
 });
 

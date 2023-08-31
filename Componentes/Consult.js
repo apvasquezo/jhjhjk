@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import DatePicker from 'react-native-date-picker';
+import Datepicker from 'react-native-modern-datepicker';
+import { getToday, getFormatedDate } from 'react-native-modern-datepicker';
 
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   TextInput,
   Image,
   Pressable,
+  Modal,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 
 const Consult = () => {
+  const today=new Date();
+  const starToday=getFormatedDate(today.setDate(today.getDate()+1), 'YYYY/MM/DD')
   const [fechaI, setFechaI] = useState( new Date());  
   const [fechaF, setFechaF] = useState( new Date());
-  const [open,setOpen] = useState(false)
+  const [open, SetOpen] = useState(false)
   const navigation = useNavigation();
 
   const consult=()=>{
@@ -28,76 +33,88 @@ const Consult = () => {
     navigation.navigate('Home')
   }
  
+  function handleOpen(){
+    SetOpen(!open);
+  }
+
+  function handleChangeI(propDate){
+    setFechaI(propDate);
+  }
+
+  function handleChangeF(propDate){
+    setFechaF(propDate);
+  }
+
   return (
-    <View style={styles.Container}>
-      <Image
-        style={styles.logo}
-      source={require('../images/mina.jpg')}
-      />
-      <View>
-        <Text style={styles.label}>Fecha Inicial</Text>
-        <TextInput
-          placeholder="01/01/2023"
-          value={fechaI}
-          onChangeText={setFechaF}
+    <ScrollView>
+      <View style={styles.Container}>
+        <Image
+          style={styles.logo}
+          source={require('../images/mina.jpg')}
+        />      
+        <TouchableOpacity onPress={handleOpen}>
+          <Text style={styles.label}>Fecha Inicial</Text> 
+        </TouchableOpacity>    
+        <Modal
+          style={styles.modal}
+          animationType='slide'
+          transparent={true}
+          visible={open}>
+          <Datepicker 
+            locale='es'
+            mode='calendar'
+            minimunDate={starToday}
+            selected={Date}
+            onDateChange={handleChangeI}         
+          />
+          <TouchableOpacity onPress={handleOpen}>
+            <Text style={styles.btn_fecha}>Cerrar</Text>
+          </TouchableOpacity>
+        </Modal>
+
+        <TextInput 
           style={styles.input}
-        />
-        <Pressable 
-          style={styles.btn_fecha}
-          onPress={() => setOpen(true)}>
-
-          <Text style={styles.btn_txtcita}>Open</Text>        
-        </Pressable>
-        <DatePicker
-            modal
-            open={open}
-            date={fechaI}
-
-            onConfirm={(date) => {
-              setOpen(false)
-              setFechaI(date)
-            }}
-            onCancel={() => {
-              setOpen(false)
-            }}></DatePicker>
-      </View>
-      <View>
-        <Text style={styles.label}>Fecha Final</Text>
-        <TextInput
-          placeholder="01/01/2023"
-          value={fechaF}
-          onChangeText={setFechaF}
+          value={fechaI} 
+          setValue={setFechaI} 
+          disabled />        
+        <TouchableOpacity onPress={handleOpen}>
+          <Text style={styles.label}>Fecha Final</Text>
+        </TouchableOpacity>
+        <Modal
+          style={styles.modal}
+          animationType='slide'
+          transparent={true}
+          visible={open}>
+          <Datepicker 
+            locale='es'
+            mode='calendar'
+            minimunDate={starToday}
+            selected={Date}
+            onDateChange={handleChangeF}         
+          />
+          <TouchableOpacity onPress={handleOpen}>
+            <Text style={styles.btn_fecha}>Cerrar</Text>
+          </TouchableOpacity>
+        </Modal>
+        <TextInput 
           style={styles.input}
-        />
-        <Pressable 
-          style={styles.btn_fecha}
-          onPress={() => setOpen(true) }>
-          <Text style={styles.btn_txtcita}>Open</Text>        
-        </Pressable>
-        <DatePicker
-            modal
-            open={open}
-            date={fechaF}
-            onConfirm={(fechaf) => {
-              setOpen(false)
-              setFechaI(fechaf)
-            }}
-            onCancel={() => {
-              setOpen(false)
-            }}></DatePicker>        
+          value={fechaF} 
+          setValue={setFechaF} 
+          disabled />    
+        <View>
+          <Pressable 
+            style={styles.btn_cita}
+            onPress={consult}>
+            <Text style={styles.btn_txtcita}>Consultar</Text>
+          </Pressable>  
+          <Pressable 
+            style={styles.btn_cita}
+            onPress={exit}>
+            <Text style={styles.btn_txtcita}>Salir</Text>
+          </Pressable>
+        </View>    
       </View>
-      <Pressable 
-        style={styles.btn_cita}
-        onPress={consult}>
-        <Text style={styles.btn_txtcita}>Consultar</Text>
-      </Pressable>  
-      <Pressable 
-        style={styles.btn_cita}
-        onPress={exit}>
-        <Text style={styles.btn_txtcita}>Salir</Text>
-      </Pressable>    
-    </View>
-
+    </ScrollView>
     );
 }
 
@@ -138,10 +155,15 @@ const styles = StyleSheet.create({
   btn_fecha:{
     width: '20%',
     height: 40,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color:'white',
     paddingHorizontal: 10,
+    paddingVertical:10,
     marginVertical:10,
-    marginHorizontal:300,   
-    backgroundColor:'#04a6fc', 
+    marginHorizontal:150,   
+    backgroundColor:'#04a6fc',
+    borderRadius:20, 
   },
 
   btn_txtcita:{
@@ -160,7 +182,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginHorizontal: 20,
   },
-
+  modal:{
+    height:200,
+  }
 });
 
 export default Consult;

@@ -19,6 +19,17 @@ const ExitTime = () => {
     console.log('to register');
     navigation.navigate('Home');
   };
+  useEffect(() => {
+    setDateS(new Date());
+    setTimeS(new Date());
+  }, []);
+  
+  const formatTime = (time) => {
+    const hours = time.getHours();
+    const minutes = time.getMinutes();
+    return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+  };
+
 
   return (
     <View style={styles.Container}>
@@ -26,9 +37,9 @@ const ExitTime = () => {
       <View>
         <Text style={styles.label}>Fecha de Salida</Text>
         <TextInput
-          placeholder="01/01/2024"
-          value={dateS}
-          onChangeText={setDateS => this.setState({ Date })}
+          value={date.toString().split('  ')[0]} 
+          setValue={setDate}
+          disabled
           style={styles.input}
         />
       </View>
@@ -36,8 +47,8 @@ const ExitTime = () => {
         <Text style={styles.label}>Hora de Salida</Text>
         <TextInput
           placeholder="10:00"
-          value={timeS}
-          onChangeText={setTimeS => this.setState({ Date })}
+          value={formatTime(timeS)}
+          setValue={setTimeS}
           style={styles.input}
         />
       </View>

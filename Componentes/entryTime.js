@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   StyleSheet,
@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 
 const entryTime = () => {
-  const [date, setDate] = useState(Date);
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
   const [entry, setEntry] = useState('');
-  const [time, setTime] = useState(Date);
   const navigation=useNavigation();
 
   const save = () => {
@@ -20,26 +20,35 @@ const entryTime = () => {
     navigation.navigate('Home');
   };
 
+  useEffect(() => {
+    setDate(new Date());
+    setTime(new Date());
+  }, []);
+  
+  const formatTime = (time) => {
+    const hours = time.getHours();
+    const minutes = time.getMinutes();
+    return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+  };
+  
+
   return (
     <View style={styles.Container}>
       <Image style={styles.logo} source={require('../images/mina.jpg')} />
       <View>
         <Text style={styles.label}>Fecha de Ingreso</Text>
-        <TextInput
-          placeholder="01/01/2024"
-          value={date}
-          onChangeText={setDate => this.setState({ Date })}
+        <TextInput 
           style={styles.input}
-        />
+          value={date.toString().split('  ')[0]} 
+          setValue={setDate} 
+          disabled />
       </View>
       <View>
         <Text style={styles.label}>Hora de Ingreso</Text>
         <TextInput
-          placeholder="10:00"
-          value={time}
-          onChangeText={setTime => this.setState({ Date })}
           style={styles.input}
-        />
+          value={formatTime(time)} 
+          setValue={setTime} disabled/>
       </View>
       <View>
         <Text style={styles.label}>Jornada Laboral</Text>
