@@ -2,12 +2,12 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import NewsEvent from "../Componentes/NewsEvent";
-import entryTime from "../Componentes/entryTime";
 import Consult from "../Componentes/Consult";
 import Home from "../Componentes/Home";
 import LoginScreen from "../Componentes/LoginScreen";
 import Checkin from "../Componentes/checkin";
-import ExitTime from "../Componentes/exitTime";
+import ExitTime from "../Componentes/ExitTime";
+import EntryTime from "../Componentes/EntryTime";
 
 const stack=createNativeStackNavigator()
 
@@ -18,17 +18,17 @@ const MainStack = () => {
                 <stack.Screen
                 name="LoginScreen" component={LoginScreen} />                
                 <stack.Screen
-                name="checkin" component={Checkin} />                
+                name="Checkin" component={Checkin} />                
                 <stack.Screen                
                 name="Home" component={Home} />
                 <stack.Screen
-                name="exitTime" component={ExitTime} />
+                name="ExitTime" component={ExitTime} />
                 <stack.Screen
                 name="Consult" component={Consult} />   
                 <stack.Screen
                 name="NewsEvent" component={NewsEvent} />     
                 <stack.Screen
-                name="entryTime" component={entryTime} />                        
+                name="EntryTime" component={EntryTime} />                        
             </stack.Navigator>
         </NavigationContainer>
     )

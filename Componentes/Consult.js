@@ -22,6 +22,7 @@ const Consult = () => {
   const [fechaI, setFechaI] = useState( new Date());  
   const [fechaF, setFechaF] = useState( new Date());
   const [open, SetOpen] = useState(false)
+  const [openF, SetOpenF] = useState(false);
   const navigation = useNavigation();
 
   const consult=()=>{
@@ -35,6 +36,10 @@ const Consult = () => {
  
   function handleOpen(){
     SetOpen(!open);
+  }
+
+  function handleOpenF(){
+    SetOpenF(!openF);
   }
 
   function handleChangeI(propDate){
@@ -77,14 +82,14 @@ const Consult = () => {
           value={fechaI} 
           setValue={setFechaI} 
           disabled />        
-        <TouchableOpacity onPress={handleOpen}>
+        <TouchableOpacity onPress={handleOpenF}>
           <Text style={styles.label}>Fecha Final</Text>
         </TouchableOpacity>
         <Modal
           style={styles.modal}
           animationType='slide'
           transparent={true}
-          visible={open}>
+          visible={openF}>
           <Datepicker 
             locale='es'
             mode='calendar'
@@ -92,13 +97,13 @@ const Consult = () => {
             selected={Date}
             onDateChange={handleChangeF}         
           />
-          <TouchableOpacity onPress={handleOpen}>
+          <TouchableOpacity onPress={handleOpenF}>
             <Text style={styles.btn_fecha}>Cerrar</Text>
           </TouchableOpacity>
         </Modal>
         <TextInput 
           style={styles.input}
-          value={fechaF} 
+          value={fechaF}
           setValue={setFechaF} 
           disabled />    
         <View>

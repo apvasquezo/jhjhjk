@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
+
 import {
   StyleSheet,
   Text,
@@ -9,7 +10,7 @@ import {
   Pressable,
 } from 'react-native';
 
-const entryTime = () => {
+const EntryTime = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [entry, setEntry] = useState('');
@@ -40,7 +41,7 @@ const entryTime = () => {
         <TextInput 
           style={styles.input}
           value={date.toString().split('  ')[0]} 
-          setValue={setDate} 
+          setValue={setDate}
           disabled />
       </View>
       <View>
@@ -120,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default entryTime;
+export default EntryTime;

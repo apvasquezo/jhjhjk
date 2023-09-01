@@ -13,11 +13,11 @@ const Home = () => {
 
   const entryTimeN = () => {
     console.log('Hora de entrada');
-    navigation.navigate('entryTime');
+    navigation.navigate('EntryTime');
   };
   const exitTimeN = () => {
     console.log('Hora de salida');
-    navigation.navigate('exitTime');
+    navigation.navigate('ExitTime');
   };
   const consulTime = () => {
     console.log('Consulta de horas');

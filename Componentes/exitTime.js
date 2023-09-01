@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   StyleSheet,
@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 
 const ExitTime = () => {
-  const [dateS, setDateS] = useState(Date);
+  const [dateS, setDateS] = useState(new Date());
   const [entryS, setEntryS] = useState('');
-  const [timeS, setTimeS] = useState(Date);
+  const [timeS, setTimeS] = useState(new Date());
   const navigation=useNavigation();
 
   const save = () => {
@@ -24,9 +24,9 @@ const ExitTime = () => {
     setTimeS(new Date());
   }, []);
   
-  const formatTime = (time) => {
-    const hours = time.getHours();
-    const minutes = time.getMinutes();
+  const formatTime = (timeS) => {
+    const hours = timeS.getHours();
+    const minutes = timeS.getMinutes();
     return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
   };
 
@@ -37,8 +37,8 @@ const ExitTime = () => {
       <View>
         <Text style={styles.label}>Fecha de Salida</Text>
         <TextInput
-          value={date.toString().split('  ')[0]} 
-          setValue={setDate}
+          value={dateS.toString().split('  ')[0]} 
+          setValue={setDateS}
           disabled
           style={styles.input}
         />

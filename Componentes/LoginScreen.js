@@ -19,7 +19,7 @@ const LoginScreen = () => {
 
   const register=()=>{
     console.log('to register');
-    navigation.navigate('checkin');
+    navigation.navigate('Checkin');
   }
   const handleLogin = () => {
     // autenticación

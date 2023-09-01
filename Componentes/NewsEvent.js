@@ -15,6 +15,7 @@ const NewsEvent = () => {
   const [fechaI, setFechaI] = useState( new Date());  
   const [fechaF, setFechaF] = useState( new Date());
   const [open, SetOpen] = useState(false);
+  const [openF, SetOpenF] = useState(false);
   const navigation=useNavigation();
 
   const saveNews = () => {
@@ -26,6 +27,9 @@ const NewsEvent = () => {
     SetOpen(!open);
   }
 
+  function handleOpenF(){
+    SetOpenF(!openF);
+  }
   function handleChangeI(propDate){
     setFechaI(propDate)
   }
@@ -80,13 +84,15 @@ const NewsEvent = () => {
             value={fechaI} 
             setValue={setFechaI} 
             disabled />        
-          <TouchableOpacity onPress={handleOpen}>
-            <Text style={styles.label}>Fecha Final</Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={handleOpenF}>
+              <Text style={styles.label}>Fecha Final</Text>
           </TouchableOpacity>
           <Modal
             animationType='slide'
             transparent={true}
-            visible={open}>
+            visible={openF}>
             <Datepicker 
               locale='es'
               mode='calendar'
@@ -94,15 +100,15 @@ const NewsEvent = () => {
               selected={Date}
               onDateChange={handleChangeF}         
             />
-            <TouchableOpacity onPress={handleOpen}>
+            <TouchableOpacity onPress={handleOpenF}>
               <Text style={styles.btn_fecha}>Cerrar</Text>
             </TouchableOpacity>
           </Modal>
           <TextInput 
             style={styles.input}
             value={fechaF} 
-            setValue={setFechaF} 
-            disabled />    
+            setValue={setFechaF}
+            disabled />          
         </View>
         <View>
           <Pressable style={styles.btn_cita} onPress={saveNews}>
