@@ -8,6 +8,7 @@ import {
   TextInput,
   Image,
   Pressable,
+  getDateTime,
 } from 'react-native';
 
 const EntryTime = () => {
@@ -22,8 +23,8 @@ const EntryTime = () => {
   };
 
   useEffect(() => {
-    setDate(new Date());
-    setTime(new Date());
+    setDate(new Date);
+    setTime(new Date);
   }, []);
   
   const formatTime = (time) => {
@@ -31,7 +32,17 @@ const EntryTime = () => {
     const minutes = time.getMinutes();
     return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
   };
-  
+
+  const formateoFecha = fecha =>{
+    const nuevaFecha = new Date(fecha)
+      const opciones = {
+          weekday: 'long',
+          year:'numeric',
+          month:'long',
+          day:'numeric'
+      }
+      return nuevaFecha.toLocaleDateString('es-ES', opciones)
+  };
 
   return (
     <View style={styles.Container}>
@@ -40,7 +51,7 @@ const EntryTime = () => {
         <Text style={styles.label}>Fecha de Ingreso</Text>
         <TextInput 
           style={styles.input}
-          value={date.toString().split('  ')[0]} 
+          value={formateoFecha(date)} 
           setValue={setDate}
           disabled />
       </View>

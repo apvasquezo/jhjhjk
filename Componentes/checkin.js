@@ -21,7 +21,7 @@ const Checkin = () => {
   const toregistet = () => {
     console.log('to register');
     navigation.navigate('LoginScreen');
-    if (re.match(regular,email.lower())){
+    if (setRegular.email){
         navigation.navigate('LoginScreen');
     }
   };

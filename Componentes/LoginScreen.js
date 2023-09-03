@@ -27,6 +27,8 @@ const LoginScreen = () => {
       console.log('Inicio de sesión exitoso');
       navigation.navigate('Home');
     } else {
+      setUsername('')
+      setPassword('')
       console.log('Credenciales incorrectas');
     }
   };
@@ -42,6 +44,7 @@ const LoginScreen = () => {
         value={username}
         onChangeText={setUsername}
         style={styles.input}
+        image='user'
       />
       <TextInput
         placeholder="Contraseña"

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from 'react-native-check-box';
 import Datepicker from 'react-native-modern-datepicker';
 import { getToday, getFormatedDate } from 'react-native-modern-datepicker';
 

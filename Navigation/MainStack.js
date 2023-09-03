@@ -5,7 +5,7 @@ import NewsEvent from "../Componentes/NewsEvent";
 import Consult from "../Componentes/Consult";
 import Home from "../Componentes/Home";
 import LoginScreen from "../Componentes/LoginScreen";
-import Checkin from "../Componentes/checkin";
+import Checkin from "../Componentes/Checkin";
 import ExitTime from "../Componentes/ExitTime";
 import EntryTime from "../Componentes/EntryTime";
 
