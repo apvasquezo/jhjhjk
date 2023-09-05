@@ -29,6 +29,7 @@ const LoginScreen = () => {
     } else {
       setUsername('')
       setPassword('')
+      Alert.alert('Error', 'Credenciales incorrectas');
       console.log('Credenciales incorrectas');
     }
   };

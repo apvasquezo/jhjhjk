@@ -21,9 +21,6 @@ const Checkin = () => {
   const toregistet = () => {
     console.log('to register');
     navigation.navigate('LoginScreen');
-    if (setRegular.email){
-        navigation.navigate('LoginScreen');
-    }
   };
 
   return (
