@@ -9,6 +9,7 @@ import {
   Image,
   Pressable,
   Icon,
+  Alert,
 } from 'react-native';
 
 
@@ -27,8 +28,8 @@ const LoginScreen = () => {
       console.log('Inicio de sesión exitoso');
       navigation.navigate('Home');
     } else {
-      setUsername('')
-      setPassword('')
+      setUsername('');
+      setPassword('');
       Alert.alert('Error', 'Credenciales incorrectas');
       console.log('Credenciales incorrectas');
     }

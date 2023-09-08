@@ -36,9 +36,8 @@ const EntryTime = () => {
   const formateoFecha = fecha =>{
     const nuevaFecha = new Date(fecha)
       const opciones = {
-          weekday: 'long',
           year:'numeric',
-          month:'long',
+          month:'numeric',
           day:'numeric'
       }
       return nuevaFecha.toLocaleDateString('es-ES', opciones)

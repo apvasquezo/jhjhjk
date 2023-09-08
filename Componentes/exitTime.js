@@ -37,7 +37,7 @@ const ExitTime = () => {
       <View>
         <Text style={styles.label}>Fecha de Salida</Text>
         <TextInput
-          value={dateS.toLocaleString('es-ES',dateS).split('  ')[0]} 
+          value={dateS.toLocaleString('es-ES',dateS).split(' ')[0]} 
           setValue={setDateS}
           disabled
           style={styles.input}
